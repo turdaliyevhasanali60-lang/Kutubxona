@@ -26,5 +26,33 @@
         </a>
     </p>
     {% endfor %}
+    <hr>
+    <h3>
+        Yangi kitob qo'shish
+    </h3>
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Nom: </label>
+        <input type="text" name="nom" id="name" required>
+        <br><br>
+
+        <label for="genre">Janr: </label>
+        <input type="text" name="janr" id="genre" required>
+        <br><br>
+
+        <label for="pages">Sahifa: </label>
+        <input type="number" name="sahifa" id="pages" required>
+        <br><br>
+        <label for="author">Muallif:</label>
+        <select name="muallif_id" id="author">
+            {% for muallif in mualliflar %}
+            <option value="{{ muallif.id }}">{{muallif.ism}}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button>
+            Qo'shish
+        </button>
+    </form>
 </body>
 </html>

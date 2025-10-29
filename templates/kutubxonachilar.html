@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kutubxona | Kutubxonachilar ro'yxati</title>
+</head>
+<body>
+    <h1>Kutubxonachilar ro'yxati</h1>
+    <hr>
+    <form>
+        <input type="text" name="search" placeholder="Ism bo'yicha.." {% if search %}value="{{ search }}"{% endif %}>
+        <button>Qidirish</button>
+    </form>
+    <br>
+    <hr>
+    <a href="/">Bosh sahifa</a>
+    {% for kutubxonachi in kutubxonachilar %}
+        <p>
+            {{ forloop.counter}}.
+            <a href="/kutubxonachilar/{{ kutubxonachi.id }}/">
+                {{kutubxonachi.ism}}
+            </a>
+
+            <a href="/kutubxonachilar/{{ kutubxonachi.id }}/delete/confirm/">
+                <button>O'chirish</button>
+            </a>
+
+        </p>
+    {% endfor %}
+    <hr>
+    <h3>Yangi Kutubxonachi Qo'shish</h3>
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Ism:</label>
+        <input type="text" name="ism" id="name" required>
+        <br><br>
+
+        <form>
+        <select name="ish_vaqti" id="ish_vaqti" required>
+        {% for option in working_hours_options %}
+            <option value="{{ option }}">{{ option }}</option>
+        {% endfor %}
+        </select>
+            <br><br>
+              <button>Qo'shish</button>
+        </form>
+
+    </form>
+</body>
+</html>

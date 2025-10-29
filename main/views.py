@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 import datetime
 from .models import *
@@ -19,6 +19,16 @@ def index(request):
     return render(request, 'index.html', context)
 
 def talabalar_view(request):
+    if request.method == "POST":
+        Talaba.objects.create(
+            ism = request.POST.get("ism"),
+            guruh = request.POST.get("guruh"),
+            kurs = request.POST.get("kurs"),
+            kitob_soni = request.POST.get("kitob_soni") if request.POST.get("kitob_soni") else 0,
+        )
+        return redirect('/talabalar/')
+
+
     talabalar = Talaba.objects.all()
 
     search = request.GET.get('search')
@@ -63,6 +73,14 @@ def talaba_delete_confirm_view(request, talaba_id):
 
 
 def mualliflar_view(request):
+    if request.method == "POST":
+        Muallif.objects.create(
+            ism = request.POST.get("ism"),
+            jins = request.POST.get("jins"),
+            tugilgan_sana = request.POST.get("tugilgan_sana"),
+            kitob_soni = request.POST.get("kitob_soni"),
+            tirik=True if request.POST.get("tirik") == "on" else False,
+        )
     mualliflar = Muallif.objects.all()
     order = request.GET.get('order')
     if order:
@@ -87,10 +105,17 @@ def muallif_retrieve_view(request, muallif_id):
     return render(request, 'muallif-retrieve_view.html', context)
 
 def kitoblar_view(request):
+    if request.method == "POST":
+        Kitob.objects.create(
+            nom=request.POST.get("nom"),
+            janr=request.POST.get("janr"),
+            sahifa=request.POST.get("sahifa"),
+            muallif=get_object_or_404(Muallif, id=request.POST.get("muallif_id")),
+        )
+
     kitoblar = Kitob.objects.all()
     search = request.GET.get('search')
-
-
+    mualliflar = Muallif.objects.all()
 
     if search:
         kitoblar = kitoblar.filter(nom__contains=search)
@@ -98,6 +123,8 @@ def kitoblar_view(request):
     context = {
         "kitoblar": kitoblar,
         "search": search,
+        "mualliflar": mualliflar,
+
     }
     return render(request, 'kitoblar.html', context)
 
@@ -114,14 +141,28 @@ def kitob_delete_view(request, kitob_id):
     return redirect('/kitoblar/')
 
 def record_view(request):
+    if request.method == "POST":
+        Record.objects.create(
+            talaba=get_object_or_404(Talaba, id=request.POST.get("talaba_id")),
+            kitob=get_object_or_404(Kitob, id=request.POST.get("kitob_id")),
+            kutubxonachi=get_object_or_404(Kutubxonachi, id=request.POST.get("kutubxonachi_id")),
+            olingan_sana=request.POST.get("olingan_sana"),
+            qaytarish_sana=request.POST.get("qaytarish_sana"),
+        )
     recordlar = Record.objects.all()
     order = request.GET.get('order')
     if order:
         recordlar = recordlar.order_by(order)
 
+    talabalar = Talaba.objects.all()
+    kitoblar = Kitob.objects.all()
+    kutubxonachilar = Kutubxonachi.objects.all()
     context = {
         "recordlar": recordlar,
         "order": order,
+        "talabalar": talabalar,
+        "kitoblar": kitoblar,
+        "kutubxonachilar": kutubxonachilar,
     }
     return render(request, 'recordlar.html', context)
 
@@ -136,6 +177,30 @@ def record_retrieve_view(request, record_id):
         "record": record,
     }
     return render(request, 'record-retrieve_view.html', context)
+
+
+def kutubxonachilar_view(request):
+    if request.method == "POST":
+        ism = request.POST.get("ism")
+        ish_vaqti = request.POST.get("ish_vaqti")
+        if ism and ish_vaqti:
+            Kutubxonachi.objects.create(ism=ism, ish_vaqti=ish_vaqti)
+            return redirect('/kutubxonachi/')
+    kutubxonachilar = Kutubxonachi.objects.all()
+    working_hours_options = [
+        "09:00-17:00",
+        "10:00-18:00",
+        "12:00-20:00"
+    ]
+    search = request.GET.get('search')
+    if search:
+        kutubxonachilar = kutubxonachilar.filter(ism__contains=search)
+    context = {
+        "kutubxonachilar": kutubxonachilar,
+        "search": search,
+        "working_hours_options": working_hours_options,
+    }
+    return render(request, 'kutubxonachilar.html', context)
 
 def tirik_mualliflar_view(request):
     tirik_mualliflar = Muallif.objects.filter(tirik=True)

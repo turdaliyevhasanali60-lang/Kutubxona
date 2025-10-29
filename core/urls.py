@@ -43,4 +43,7 @@ urlpatterns = [
 
     path('bTalabaR/', bitiruvchiTalabarR_view),
 
+    path('kutubxonachilar/', kutubxonachilar_view, name='kutubxonachilar'),
+    path('kutubxonachi/', kutubxonachilar_view),
+
 ]

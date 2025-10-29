@@ -30,5 +30,45 @@
 
     </p>
 
+    <hr>
+    <h3>Record Qo'shish</h3>
+
+<form method="post">
+    {% csrf_token %}
+
+    <label for="talaba">Talaba</label>
+    <select name="talaba_id" id="talaba" required>
+        {% for talaba in talabalar %}
+        <option value="{{ talaba.id }}">{{ talaba.ism }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+
+    <label for="kitob">Kitob</label>
+    <select name="kitob_id" id="kitob" required>
+        {% for kitob in kitoblar %}
+        <option value="{{ kitob.id }}">{{ kitob.nom }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+
+    <label for="kutubxonachi">Kutubxonachi</label>
+    <select name="kutubxonachi_id" id="kutubxonachi" required>
+        {% for kutubxonachi in kutubxonachilar %}
+        <option value="{{ kutubxonachi.id }}">{{ kutubxonachi.ism }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+
+    <label for="sana">Olingan Sana</label>
+    <input type="date" name="olingan_sana" id="sana" required>
+    <br><br>
+
+    <label for="sanasi">Qaytarish Sanasi</label>
+    <input type="date" name="qaytarish_sana" id="sanasi" required>
+    <br><br>
+
+    <button type="submit">Qo'shish</button>
+</form>
 </body>
 </html>

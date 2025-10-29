@@ -27,9 +27,48 @@
         </select>
         <button>Go</button>
     </form>
-
          </p>
-    
+
+    <hr>
+
+    <h3>Muallif Qo'shish</h3>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="name">Ism:</label>
+        <input type="text" name="ism" id="name" required>
+        <br><br>
+
+        <label for="jins">Jins:</label>
+        <select name="jins" id="jins">
+            <option value="Erkak">Erkak</option>
+            <option value="Ayol">Ayol</option>
+        </select>
+
+        <br><br>
+
+
+        <label for="date">Tug'ilgan sana:</label>
+        <input type="date" name="tugilgan_sana" id="date">
+        <br><br>
+
+
+        <label for="books">Kitob soni:</label>
+        <input type="number" name="kitob_soni" id="books" required>
+        <br><br>
+
+
+        <label for="tirik">Tirik:</label>
+        <select name="tirik" id="tirik">
+            <option value="True">True</option>
+            <option value="False">False</option>
+        </select>
+        <br><br>
+
+<button>Qo'shish</button>
+
+    </form>
 
 </body>
 </html>

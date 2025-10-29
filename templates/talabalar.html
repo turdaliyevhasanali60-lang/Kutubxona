@@ -47,6 +47,23 @@
 
         </p>
     {% endfor %}
-
+    <hr>
+    <h3>Yangi Talaba Qo'shish</h3>
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Ism:</label>
+        <input type="text" name="ism" id="name" required>
+        <br><br>
+        <label for="group">Guruh:</label>
+        <input type="text" name="guruh" id="group" required>
+        <br><br>
+        <label for="kurs">Kurs:</label>
+        <input type="number" name="kurs" id="kurs" value="1">
+        <br><br>
+        <label for="numOfbooks">Kitob soni:</label>
+        <input type="number" name="kitob_soni" id="numOfbooks" value="0">
+        <br><br>
+        <button>Qo'shish</button>
+    </form>
 </body>
 </html>

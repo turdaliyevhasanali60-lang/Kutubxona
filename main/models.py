@@ -31,7 +31,7 @@ class Kitob(models.Model):
 
 class Kutubxonachi(models.Model):
     ism = models.CharField(max_length=50)
-    ish_vaqti = models.TimeField()
+    ish_vaqti = models.CharField(max_length=50)
     def __str__(self):
         return self.ism
 
