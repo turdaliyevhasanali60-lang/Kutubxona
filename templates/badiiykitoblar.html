@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kutubxona | Badiiy Kitoblar ro'yxati</title>
+</head>
+<body>
+    <h1>Badiiy kitoblar ro'yxati</h1>
+    <a href="/">Bosh sahifa</a>
+
+    {% for kitob in badiiykitoblar %}
+    <p>
+        {{forloop.counter}}.
+        <a href="/kitoblar/{{ kitob.id }}/">
+                {{ kitob.nom }}
+            </a>
+
+    </p>
+    {% endfor %}
+</body>
+</html>

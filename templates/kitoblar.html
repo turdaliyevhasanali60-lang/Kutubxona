@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kutubxona | Kitoblar Ro'yxati</title>
+</head>
+<body>
+    <h1>Kitoblar Ro'yxati</h1>
+    <hr>
+
+    <form>
+        <input type="text" name="search" placeholder="Kitob nomi bo'yicha.." {% if search %}value="{{search}}"{% endif %}>
+        <button>Qidirish</button>
+    </form>
+    <br>
+    <a href="/">Bosh sahifa</a>
+    {% for kitob in kitoblar %}
+    <p>
+        {{ forloop.counter }}.
+        <a href="/kitoblar/{{kitob.id}}/">
+            {{ kitob.nom }}
+        </a>
+        <br>
+        <a href="/kitoblar/{{kitob.id}}/delete/">
+            <button>O'chirish</button>
+        </a>
+    </p>
+    {% endfor %}
+</body>
+</html>

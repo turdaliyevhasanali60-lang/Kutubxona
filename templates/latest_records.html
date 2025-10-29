@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eng so'ngi recordlar</title>
+</head>
+<body>
+    <h1>Eng so'ngi recordlar:</h1>
+    <a href="/">Bosh Sahifa</a>
+
+    {% for record in latest_records %}
+    <p>
+        {{forloop.counter}}.
+        <a href="/records/{{ record.id }}/">
+                {{ record.olingan_sana }}
+            </a>
+    </p>
+    {% endfor %}
+
+</body>
+</html>

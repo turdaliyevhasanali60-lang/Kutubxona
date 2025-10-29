@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kutubxona | Talabalar ro'yxati</title>
+</head>
+<body>
+    <h1>Talabalar ro'yxati</h1>
+    <hr>
+    <form>
+        <input type="text" name="search" placeholder="Ism bo'yicha.." {% if search %}value="{{ search }}"{% endif %}>
+        <button>Qidirish</button>
+    </form>
+    <br>
+    <form >
+        <select name="order">
+            <option value="ism" {% if order == "ism"%} selected {% endif %}>Ism (a-z)</option>
+            <option value="-ism"{% if order == "-ism"%} selected {% endif %}>Ism (z-a)</option>
+            <option value="-kitob_soni" {% if order == "-kitob_soni"%} selected {% endif %} >Kitob kamayish tartibida</option>
+            <option value="kitob_soni" {% if order == "kitob_soni"%} selected {% endif %} >Kitob o'sish tartibida</option>
+        </select>
+        <button>Go</button>
+    </form>
+    <br>
+        <form >
+        <select name="kurs">
+            <option value="0">Barchasi</option>
+            <option value="1" {% if kurs == "1" %} selected {% endif %}>1-kurs</option>
+            <option value="2" {% if kurs == "2" %} selected {% endif %}>2-kurs</option>
+            <option value="3" {% if kurs == "3" %} selected {% endif %}>3-kurs</option>
+            <option value="4" {% if kurs == "4" %} selected {% endif %}>4-kurs</option>
+        </select>
+        <button>Filter</button>
+    </form>
+    <hr>
+    <a href="/">Bosh sahifa</a>
+    {% for talaba in talabalar %}
+        <p>
+            {{ forloop.counter}}.
+            <a href="/talabalar/{{ talaba.id }}/">
+                {{talaba.ism}}
+            </a>
+
+            <a href="/talabalar/{{ talaba.id }}/delete/confirm/">
+                <button>O'chirish</button>
+            </a>
+
+        </p>
+    {% endfor %}
+
+</body>
+</html>

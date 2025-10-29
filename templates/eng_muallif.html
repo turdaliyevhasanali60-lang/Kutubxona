@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eng ko'p kitobi bor 3ta muallif</title>
+</head>
+<body>
+    <h1>Eng ko'p kitobi bor 3ta muallif</h1>
+        <a href="/">Bosh Sahifa</a>
+
+    {% for muallif in eng_muallif %}
+    <p>
+        {{forloop.counter}}.
+        <a href="/mualliflar/{{ muallif.id }}/">
+                {{ muallif.ism }}
+            </a>
+    </p>
+    {% endfor %}
+</body>
+</html>

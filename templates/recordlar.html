@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Kutubxona | Recordlar Ro'yxati </title>
+</head>
+<body>
+    <h1>Recordlar Ro'yxati</h1>
+    <hr>
+
+    <a href="/">Bosh sahifa</a>
+    {% for record in recordlar %}
+    <p>
+        {{ forloop.counter }}
+        <a href="/recordlar/{{record.id}}/">
+            {{ record.talaba }} | {{ record.kitob.nom }}
+        </a>
+                <a href="/recordlar/{{record.id}}/delete/">
+                    <button>O'chirish</button>
+                    {% endfor %}
+        </a>
+    <form>
+        <select name="order">
+        <option value="talaba" {% if order == "talaba"%} selected {% endif %}>Talaba (a-z)</option>
+        <option value="-talaba" {% if order == "-talaba"%} selected {% endif %}>Talaba (z-a)</option>
+        </select>
+        <button>Go</button>
+    </form>
+
+
+    </p>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bitiruvchilar Ro'yxati</title>
+</head>
+<body>
+    <h1>Bitiruvchi talabalar recordlari</h1>
+    <a href="/">Bosh sahifa</a>
+    <hr>
+
+    {% for record in bitiruvchitalabarR %}
+        <div style="margin-bottom: 20px;">
+            <p>
+                {{ forloop.counter }}.
+                <a href="/recordlar/{{ record.id }}/">
+                    Record ID: {{ record.id }}
+                </a>
+            </p>
+<p>Talaba: {{ record.talaba.ism }}</p>
+<p>Kitob: {{ record.kitob.nom }}</p>
+<p>Kutubxonachi: {{ record.kutubxonachi.ism }}</p>
+        </div>
+        <hr>
+    {% endfor %}
+</body>
+</html>

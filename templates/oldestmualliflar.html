@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eng yoshi katta 3 ta mualliflar</title>
+</head>
+<body>
+    <h1>Eng yoshi katta 3 ta mualliflar</h1>
+    <a href="/">Bosh sahifa</a>
+
+    {% for muallif in oldestmualliflar %}
+    <p>
+        {{forloop.counter}}.
+        <a href="/mualliflar/{{ muallif.id }}/">
+            {{ muallif.ism }}
+        </a>
+
+    </p>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eng Katta 3 ta kitob</title>
+</head>
+<body>
+    <h1>Eng Katta 3 ta kitob:</h1>
+    <a href="/">Bosh Sahifa</a>
+
+    {% for kitob in eng_3_kitob %}
+    <p>
+        {{forloop.counter}}.
+        <a href="/kitoblar/{{ kitob.id }}/">
+                {{ kitob.nom }}
+            </a>
+    </p>
+    {% endfor %}
+</body>
+</html>

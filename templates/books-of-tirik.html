@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tirik Mualliflar Kitobalari</title>
+</head>
+<body>
+    <h1>Tirik Mualliflar Kitobalari</h1>
+
+    <a href="/">Bosh Sahifa</a>
+
+    {% for kitob in booksOfTirikM %}
+    <p>
+        {{forloop.counter}}.
+        <a href="/kitoblar/{{ kitob.id }}/">
+                {{ kitob.nom }}
+            </a>
+    </p>
+    {% endfor %}
+</body>
+</html>

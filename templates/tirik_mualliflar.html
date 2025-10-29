@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kutubxona | Tirik Mualliflar Ro'yxati</title>
+</head>
+<body>
+    <h1>Tirik Mualliflar:</h1>
+    <hr>
+
+    <a href="/mualliflar/">Barcha Mualliflar</a><br><br>
+    <a href="/">Bosh Sahifa</a>
+
+    {% for muallif in tirik_mualliflar %}
+    <p>
+        {{forloop.counter}}.
+        <a href="/mualliflar/{{ muallif.id }}/">
+                {{ muallif.ism }}
+            </a>
+    </p>
+    {% endfor %}
+</body>
+</html>
