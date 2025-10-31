@@ -15,7 +15,7 @@ class Talaba(models.Model):
 class Muallif(models.Model):
     ism = models.CharField(max_length=50)
     jins = models.CharField(max_length=150, choices=[("male", "Male"), ("female", "Female")])
-    tugilgan_sana = models.DateField()
+    tugilgan_sana = models.DateField(null=True, blank=True)
     kitob_soni = models.PositiveIntegerField()
     tirik = models.BooleanField()
     def __str__(self):

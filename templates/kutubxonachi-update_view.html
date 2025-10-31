@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kutubxonachilar</title>
+</head>
+<body>
+    <h3>{{kutubxonachi.ism}}ning malumotlari</h3>
+    <hr>
+<p>
+    <a href="/kutubxonachilar/">Kutubxonachilar Ro'yxati</a>
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Ism</label>
+        <input type="text" name="ism" id="name" value="{{ kutubxonachi.ism }}"><br><br>
+        <label for="workHours">Ish vaqtlari</label>
+        <select name="ish_vaqti" id="workHours">
+            {% for option in working_hours_options %}
+                <option value="{{ option }}" {% if option == kutubxonachi.ish_vaqti %}selected{% endif %}>
+                    {{ option }}
+                </option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button>Yangilash</button>
+    </form>
+</p>
+</body>
+</html>

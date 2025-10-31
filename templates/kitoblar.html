@@ -24,12 +24,16 @@
         <a href="/kitoblar/{{kitob.id}}/delete/">
             <button>O'chirish</button>
         </a>
+        <a href="/kitoblar/{{kitob.id}}/update/">
+            <button>Yangilash</button>
+        </a>
     </p>
     {% endfor %}
     <hr>
     <h3>
         Yangi kitob qo'shish
     </h3>
+
     <form method="post">
         {% csrf_token %}
         <label for="name">Nom: </label>

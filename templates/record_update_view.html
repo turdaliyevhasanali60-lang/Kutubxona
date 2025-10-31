@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kutubxona | Recordni Tahrirlash</title>
+</head>
+<body>
+<a href="/recordlar/">Recordlar</a>
+<h3>Ushbu recordni tahrirlamoqchimisiz?</h3>
+
+<form method="post">
+    {% csrf_token %}
+
+    <label for="talaba">Talaba:</label>
+    <select id="talaba" disabled>
+        <option selected>{{ record.talaba.ism }}</option>
+    </select>
+    <br><br>
+
+    <label for="kitob">Kitob:</label>
+    <select id="kitob" disabled>
+        <option selected>{{ record.kitob.nom }}</option>
+    </select>
+    <br><br>
+
+    <label for="kutubxonachi">Kutubxonachi:</label>
+    <select id="kutubxonachi" disabled>
+        <option selected>{{ record.kutubxonachi.nom }}</option>
+    </select>
+    <br><br>
+
+    <label for="olingan_sana">Olingan sana:</label>
+    <input type="date" id="olingan_sana" value="{{ record.olingan_sana|date:'Y-m-d' }}" disabled><br><br>
+
+    <label for="qaytarish_sana">Qaytarish sana:</label>
+    <input type="date" name="qaytarish_sana" id="qaytarish_sana" value="{{ record.qaytarish_sana|date:'Y-m-d' }}" required><br><br>
+
+    <br><br>
+    <button type="submit">Saqlash</button>
+</form>
+</body>
+</html>

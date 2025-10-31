@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kutubxona | {{ kitob.nom }} Ma'lumotlari</title>
+</head>
+<body>
+    <h3>{{kitob.nom}}ning ma'lumotlari</h3>
+ <a href="{% url 'kitoblar' %}">Kitoblar Sahifasi</a>
+    <p>
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Nomi: </label>
+        <input type="text" name="nom" id="name" value="{{ kitob.nom }}"><br><br>
+        <label for="genre">Janr: </label>
+        <input type="text" name="janr" id="genre" value="{{ kitob.janr }}"><br><br>
+        <label for="pages">Sahifa: </label>
+        <input type="number" name="sahifa" id="pages" value="{{ kitob.sahifa }}"><br><br>
+        <label for="author">Muallif: </label>
+        <select name="muallif" id="author">
+            {% for muallif in mualliflar %}
+            <option value="{{ muallif.id }}" {% if muallif.id == kitob.muallif.id %}selected{% endif %}>
+                {{ muallif.ism }}</option><br><br>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button>Yangilash</button>
+    </form>
+    </p>
+</body>
+</html>

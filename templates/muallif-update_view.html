@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kutubxona | Mualliflar</title>
+</head>
+<body>
+    <h3>{{ muallif.ism }}ni ma'lumotlarini o'zgartirmoqchimisiz?</h3>
+    <hr>
+    <a href="/mualliflar/">Mualliflar</a>
+<p>
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Ism: </label>
+        <input type="text" name="ism" id="name" value="{{muallif.ism}}"><br><br>
+        <label for="gender">Jinsi: </label>
+        <select name="jins" id="gender">
+            <option value="Ayol" {% if muallif.jins == "Ayol" %}selected{% endif %}>Ayol</option>
+            <option value="Erkak" {% if muallif.jins == "Erkak" %}selected{% endif %}>Erkak</option>
+        </select><br><br>
+        <label for="Birthdate">Tug'ilgan sana: </label>
+        <input type="date" name="tugilgan_sana" id="Birthdate" value="{{ muallif.tugilgan_sana|date:'Y-m-d' }}"><br><br>
+        <label for="numsOfbooks">Kitoblar soni: </label>
+        <input type="number" name="kitoblar_soni" id="numsOfbooks" value="{{muallif.kitob_soni}}"><br><br>
+        <label for="Living">Tirik: </label>
+        <input type="checkbox" name="tirik" id="Living" {% if muallif.tirik %}checked{% endif %}>
+        <br><br>
+        <button>Yangilash</button>
+    </form>
+</p>
+</body>
+</html>

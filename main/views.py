@@ -62,7 +62,22 @@ def talaba_retrieve_view(request, talaba_id):
 def talaba_delete_view(request, talaba_id):
     talaba = Talaba.objects.get(id=talaba_id)
     talaba.delete()
-    return redirect('/talabalar/')
+    return redirect('talabalar')
+
+def talaba_update_view(request, talaba_id):
+    talaba = Talaba.objects.get(id=talaba_id)
+    if request.method == "POST":
+        Talaba.objects.filter(id=talaba_id).update(
+            ism = request.POST.get("ism"),
+            guruh = request.POST.get("guruh"),
+            kurs = request.POST.get("kurs") if request.POST.get("kurs") else 0,
+            kitob_soni = request.POST.get("kitob_soni") if request.POST.get("kitob_soni") else 0,
+        )
+        return redirect('/talabalar/', talaba_id)
+    context = {
+        "talaba": talaba,
+    }
+    return render(request, 'talaba-update_view.html', context)
 
 def talaba_delete_confirm_view(request, talaba_id):
     talaba = Talaba.objects.get(id=talaba_id)
@@ -91,6 +106,23 @@ def mualliflar_view(request):
         "order": order,
     }
     return render(request, 'mualliflar.html', context)
+
+def muallif_update_view(request, muallif_id):
+    muallif = Muallif.objects.get(id=muallif_id)
+    if request.method == "POST":
+        Muallif.objects.filter(id=muallif_id).update(
+            ism = request.POST.get("ism"),
+            jins = request.POST.get("jins"),
+            tugilgan_sana = request.POST.get("tugilgan_sana") if request.POST.get("tugilgan_sana") else None,
+            kitob_soni = request.POST.get("kitob_soni") if request.POST.get("kitob_soni") else 0,
+            tirik = True if request.POST.get("tirik") == "on" else False,
+        )
+
+        return redirect('/mualliflar/')
+    context = {
+        "muallif": muallif,
+    }
+    return render(request, 'muallif-update_view.html', context)
 
 def muallif_delete_view(request, muallif_id):
     muallif = Muallif.objects.get(id=muallif_id)
@@ -127,6 +159,24 @@ def kitoblar_view(request):
 
     }
     return render(request, 'kitoblar.html', context)
+
+def kitob_update_view(request, kitob_id):
+    mualliflar = Muallif.objects.all()
+    kitob = Kitob.objects.get(id=kitob_id)
+    if request.method == "POST":
+        Kitob.objects.filter(id=kitob_id).update(
+            nom = request.POST.get("nom"),
+            janr = request.POST.get("janr"),
+            sahifa = request.POST.get("sahifa"),
+            muallif = request.POST.get("muallif"),
+        )
+        return redirect('/kitoblar/', kitob_id)
+
+    context = {
+        "kitob": kitob,
+        "mualliflar": mualliflar,
+    }
+    return render(request, 'kitob_update_view.html', context)
 
 def kitob_retrieve_view(request, kitob_id):
     kitob = Kitob.objects.get(id=kitob_id)
@@ -166,6 +216,27 @@ def record_view(request):
     }
     return render(request, 'recordlar.html', context)
 
+def record_update_view(request, record_id):
+    record = Record.objects.get(id=record_id)
+    if request.method == "POST":
+        Record.objects.filter(id=record_id).update(
+            talaba=request.POST.get("talaba"),
+            kitob=request.POST.get("kitob"),
+            kutubxonachi=request.POST.get("kutubxonachi"),
+            olingan_sana=request.POST.get("olingan_sana"),
+            qaytarish_sana=request.POST.get("qaytarish_sana"),
+        )
+    talabalar = Talaba.objects.all()
+    kitoblar = Kitob.objects.all()
+    kutubxonachilar = Kutubxonachi.objects.all()
+    context = {
+        "talabalar": talabalar,
+        "kitoblar": kitoblar,
+        "kutubxonachilar": kutubxonachilar,
+        "record": record,
+    }
+    return render(request, 'record_update_view.html', context)
+
 def record_delete_view(request, record_id):
     record = Record.objects.get(id=record_id)
     record.delete()
@@ -201,6 +272,27 @@ def kutubxonachilar_view(request):
         "working_hours_options": working_hours_options,
     }
     return render(request, 'kutubxonachilar.html', context)
+
+def kutubxonachi_update_view(request, kutubxonachi_id):
+    kutubxonachi = Kutubxonachi.objects.get(id=kutubxonachi_id)
+    kutubxonachilar = Kutubxonachi.objects.all()
+    working_hours_options = [
+        "09:00-17:00",
+        "10:00-18:00",
+        "12:00-20:00"
+    ]
+    if request.method == "POST":
+        Kutubxonachi.objects.filter(id=kutubxonachi_id).update(
+            ism=request.POST.get("ism"),
+            ish_vaqti=request.POST.get("ish_vaqti"),
+        )
+        return redirect('kutubxonachilar')
+    context = {
+        "kutubxonachilar": kutubxonachilar,
+        "kutubxonachi": kutubxonachi,
+        "working_hours_options": working_hours_options,
+    }
+    return render(request, 'kutubxonachi-update_view.html', context)
 
 def tirik_mualliflar_view(request):
     tirik_mualliflar = Muallif.objects.filter(tirik=True)

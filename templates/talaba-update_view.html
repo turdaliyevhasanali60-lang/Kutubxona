@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kutubxona | {{talaba.ism}}ning Ma'lumotlari</title>
+</head>
+<body>
+    <h3>{{talaba.ism}}ning ma'lumotlarini tahrirlash</h3>
+    <hr>
+<p>
+    <form method="post">
+        {% csrf_token %}
+    <label for="name">Ism: </label>
+    <input type="text" name="ism" id="name" value="{{ talaba.ism }}"><br><br>
+    <label for="group">Guruh: </label>
+    <input type="text" name="guruh" id="group" value="{{ talaba.guruh }}"><br><br>
+    <label for="kurs">Kurs: </label>
+    <input type="number" name="kurs" id="kurs" value="{{ talaba.kurs }}"><br><br>
+    <label for="numOfbooks">Kitob soni:</label>
+    <input type="number" name="kitob_soni" id="numOfbooks" value="{{ talaba.kitob_soni }}"><br><br>
+    <button>Yangilash</button>
+    </form>
+</p>
+</body>
+</html>

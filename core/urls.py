@@ -7,23 +7,26 @@ urlpatterns = [
     path('test/', test_view),
     path('', index),
 
-    path('talabalar/', talabalar_view),
+    path('talabalar/', talabalar_view, name='talabalar'),
     path('talabalar/<int:talaba_id>/', talaba_retrieve_view),
     path('talabalar/<int:talaba_id>/delete/', talaba_delete_view),
+    path('talabalar/<int:talaba_id>/update/', talaba_update_view, name='talaba-update'),
     path('talabalar/<int:talaba_id>/delete/confirm/', talaba_delete_confirm_view),
 
     path('mualliflar/', mualliflar_view),
     path('mualliflar/<int:muallif_id>/delete/', muallif_delete_view),
+    path('mualliflar/<int:muallif_id>/update/', muallif_update_view),
     path('mualliflar/<int:muallif_id>/', muallif_retrieve_view),
 
-    path('kitoblar/', kitoblar_view),
+    path('kitoblar/', kitoblar_view, name='kitoblar'),
     path('kitoblar/<int:kitob_id>/', kitob_retrieve_view),
     path('kitoblar/<int:kitob_id>/delete/', kitob_delete_view),
+    path('kitoblar/<int:kitob_id>/update/', kitob_update_view),
 
     path('recordlar/', record_view),
     path('recordlar/<int:record_id>/', record_retrieve_view),
     path('recordlar/<int:record_id>/delete/', record_delete_view),
-
+    path('recordlar/<int:record_id>/update/', record_update_view, name='record_update'),
 
     path('tirik/', tirik_mualliflar_view),
 
@@ -45,5 +48,6 @@ urlpatterns = [
 
     path('kutubxonachilar/', kutubxonachilar_view, name='kutubxonachilar'),
     path('kutubxonachi/', kutubxonachilar_view),
+    path('kutubxonachilar/<int:kutubxonachi_id>/update/', kutubxonachi_update_view),
 
 ]

@@ -9,16 +9,22 @@
     <hr>
 
     <a href="/">Bosh sahifa</a>
-    {% for record in recordlar %}
-    <p>
-        {{ forloop.counter }}
-        <a href="/recordlar/{{record.id}}/">
-            {{ record.talaba }} | {{ record.kitob.nom }}
-        </a>
-                <a href="/recordlar/{{record.id}}/delete/">
-                    <button>O'chirish</button>
-                    {% endfor %}
-        </a>
+{% for record in recordlar %}
+<p>
+    {{ forloop.counter }}
+    <a href="/recordlar/{{ record.id }}/">
+        {{ record.talaba }} | {{ record.kitob.nom }}
+    </a>
+
+    <a href="/recordlar/{{ record.id }}/delete/">
+        <button type="button">O‘chirish</button>
+    </a>
+
+    <a href="{% url 'record_update' record.id %}">
+        <button type="button">Tahrirlash</button>
+    </a>
+</p>
+{% endfor %}
     <form>
         <select name="order">
         <option value="talaba" {% if order == "talaba"%} selected {% endif %}>Talaba (a-z)</option>
