@@ -69,5 +69,13 @@
         <br><br>
         <button>Qo'shish</button>
     </form>
+    <hr>
+<h2>Talaba Qo'shish</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button>Qo'shish</button>
+    </form>
+
 </body>
 </html>

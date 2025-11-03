@@ -58,5 +58,12 @@
             Qo'shish
         </button>
     </form>
+    <hr>
+<h2>Kitob Qo'shish</h2>
+    <from method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button>Yaratish</button>
+    </from>
 </body>
 </html>
